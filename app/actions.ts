@@ -38,14 +38,17 @@ export async function createDocument(formData: FormData, modelId: string, conten
   const title = contentData.title || 'Untitled';
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now();
   
+  const status = formData.get('status') === 'published' ? 'published' : 'draft';
+  
   await db.insert(documents).values({
     id: crypto.randomUUID(),
     modelId,
     slug,
+    status,
     contentJson: JSON.stringify(contentData),
     createdAt: new Date(),
     updatedAt: new Date(),
-    publishedAt: new Date(), // Auto-publish for now
+    publishedAt: status === 'published' ? new Date() : null,
   });
 
   revalidatePath('/content');

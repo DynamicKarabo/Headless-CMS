@@ -4,11 +4,15 @@ import { useState, useEffect } from 'react';
 import Sidebar from '@/components/Sidebar';
 import { createDocument, getModels } from '@/app/actions';
 import { useRouter } from 'next/navigation';
+import RichTextEditor from '@/components/RichTextEditor';
 
 export default function NewContentPage() {
   const router = useRouter();
   const [models, setModels] = useState<any[]>([]);
   const [selectedModel, setSelectedModel] = useState<any | null>(null);
+  
+  // State block for capturing rich text content which doesn't natively submit via FormData like standard inputs
+  const [richTextData, setRichTextData] = useState<Record<string, string>>({});
   
   useEffect(() => {
     getModels().then(setModels);
@@ -20,7 +24,11 @@ export default function NewContentPage() {
     const data: Record<string, any> = {};
     const schema = JSON.parse(selectedModel.schemaJson);
     schema.forEach((field: any) => {
-      data[field.name] = formData.get(field.name);
+      if (field.type === 'rich-text') {
+        data[field.name] = richTextData[field.name] || '';
+      } else {
+        data[field.name] = formData.get(field.name);
+      }
     });
 
     await createDocument(formData, selectedModel.id, data);
@@ -84,13 +92,17 @@ export default function NewContentPage() {
                     {field.required && <span className="text-red-500">*</span>}
                   </label>
                   {field.type === 'rich-text' ? (
-                    <textarea 
-                      id={field.name} 
-                      name={field.name} 
-                      className="bg-black border border-[#333333] text-white rounded-md px-4 py-3 outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all font-sans resize-y min-h-[150px]" 
-                      required={field.required}
-                      rows={6}
-                    ></textarea>
+                    <div className="flex-1">
+                      <RichTextEditor 
+                        content={richTextData[field.name] || ''} 
+                        onChange={(html) => setRichTextData(prev => ({...prev, [field.name]: html}))} 
+                        id={field.name}
+                      />
+                      {/* Hidden input to ensure native form validation works if required */}
+                      {field.required && (
+                        <input type="hidden" name={field.name} value={richTextData[field.name] || ''} required />
+                      )}
+                    </div>
                   ) : (
                     <input 
                       type="text" 
@@ -105,10 +117,20 @@ export default function NewContentPage() {
 
               <div className="flex items-center gap-4 pt-6 border-t border-[#333333] mt-8">
                 <button 
-                  type="submit" 
+                  type="submit"
+                  name="status"
+                  value="published" 
                   className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-black bg-white rounded-md hover:bg-neutral-200 transition-colors"
                 >
                   Publish Entry
+                </button>
+                <button 
+                  type="submit" 
+                  name="status"
+                  value="draft"
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-[#ededed] bg-[#1a1a1a] border border-[#333333] hover:bg-[#222222] rounded-md transition-colors"
+                >
+                  Save as Draft
                 </button>
                 <button 
                   type="button" 

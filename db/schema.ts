@@ -15,6 +15,7 @@ export const documents = sqliteTable('documents', {
     .notNull()
     .references(() => contentModels.id),
   slug: text('slug').notNull().unique(),
+  status: text('status', { enum: ['draft', 'published'] }).notNull().default('draft'),
   contentJson: text('content_json').notNull(), // JSON capturing the actual data
   publishedAt: integer('published_at', { mode: 'timestamp' }),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),

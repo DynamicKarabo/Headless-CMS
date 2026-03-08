@@ -63,9 +63,15 @@ export default async function ContentPage() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-neutral-500">{doc.slug}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">
-                          Published
-                        </span>
+                        {doc.status === 'published' ? (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">
+                            Published
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-400/10 text-amber-500 border border-amber-400/20">
+                            Draft
+                          </span>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-400">{new Date(doc.updatedAt).toLocaleDateString()}</td>
                     </tr>

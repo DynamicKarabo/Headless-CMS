@@ -19,12 +19,23 @@ export async function GET(
       results = await db
         .select()
         .from(documents)
-        .where(and(eq(documents.modelId, modelId), eq(documents.slug, slug)));
+        .where(
+          and(
+            eq(documents.modelId, modelId),
+            eq(documents.slug, slug),
+            eq(documents.status, 'published')
+          )
+        );
     } else {
       results = await db
         .select()
         .from(documents)
-        .where(eq(documents.modelId, modelId));
+        .where(
+          and(
+            eq(documents.modelId, modelId),
+            eq(documents.status, 'published')
+          )
+        );
     }
 
     if (!results || results.length === 0) {
