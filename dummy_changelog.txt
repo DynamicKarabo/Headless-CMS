@@ -46,3 +46,4 @@ feat: integrate prometheus metrics
 fix: prevent duplicate model names
 refactor: improve error boundary handling
 feat: add skeleton loaders for async data
+style: tweak font weights in sidebar
