@@ -16,3 +16,4 @@ feat: build models dashboard view
 feat: implement model creation UI
 feat: implement dynamic input fields
 feat: add content entries dashboard
+feat: create generic entry form
