@@ -27,3 +27,4 @@ fix: public route matcher in middleware
 feat: associate authors with documents
 feat: create author management dashboard
 style: update user avatars
+docs: auth provider configuration
