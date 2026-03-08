@@ -24,3 +24,4 @@ feat: add sign in and sign up models
 feat: secure dashboard routes with middleware
 feat: add user profile button to sidebar
 fix: public route matcher in middleware
+feat: associate authors with documents
