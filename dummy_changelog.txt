@@ -41,3 +41,4 @@ chore: update next.js to latest patch
 feat: add api key generation UI
 feat: secure edge API with auth headers
 fix: rate limit webhook endpoint
+feat: add analytics overview to dashboard
