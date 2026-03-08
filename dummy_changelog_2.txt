@@ -21,3 +21,4 @@ test: verify rich text serialization
 feat: add clerk authentication package
 chore: wrap app layout in clerk provider
 feat: add sign in and sign up models
+feat: secure dashboard routes with middleware
