@@ -48,3 +48,4 @@ refactor: improve error boundary handling
 feat: add skeleton loaders for async data
 style: tweak font weights in sidebar
 feat: support boolean field types
+feat: support integer field types
