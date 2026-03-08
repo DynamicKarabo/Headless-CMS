@@ -36,3 +36,4 @@ feat: support rich text field definitions
 feat: add markdown editor component
 fix: correct date formatting in tables
 feat: implement user settings page
+feat: add dark mode toggle
