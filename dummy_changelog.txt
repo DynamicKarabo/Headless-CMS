@@ -62,3 +62,4 @@ fix: correct export path resolution
 feat: add activity logs
 style: update table hover states
 feat: add image upload field
+feat: implement visual asset manager
