@@ -34,3 +34,4 @@ style: refine dashboard animations
 feat: add status badges to entries
 feat: support rich text field definitions
 feat: add markdown editor component
+fix: correct date formatting in tables
