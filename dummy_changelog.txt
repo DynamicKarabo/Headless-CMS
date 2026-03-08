@@ -1,2 +1,3 @@
 init: bootstrap project
 chore: configure typescript and eslint
+feat: add base css theme and variables
