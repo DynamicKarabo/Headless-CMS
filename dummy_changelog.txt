@@ -5,3 +5,4 @@ feat: implement responsive layout wrapper
 feat: add global sidebar navigation
 feat: setup drizzle orm
 feat: configure libsql database connection
+feat: define content model schema
