@@ -24,3 +24,4 @@ style: update primary accent color
 feat: add dynamic routing for edge content
 feat: implement next.js cache control headers
 feat: create webhook for cache invalidation
+fix: handle nonexistent slugs gracefully
