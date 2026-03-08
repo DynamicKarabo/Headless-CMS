@@ -42,3 +42,4 @@ feat: add revision history schema
 feat: support restoring previous document states
 style: update loading spinners
 chore: configure vercel build settings
+docs: finalize production deployment guide
