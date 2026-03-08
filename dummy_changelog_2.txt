@@ -7,3 +7,4 @@ style: render document status badges dynamically
 refactor: extract status badge component
 fix: resolve type error on document insertion
 feat: add bulk publish action
+feat: add bulk unpublish action
