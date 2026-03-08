@@ -51,3 +51,4 @@ feat: support boolean field types
 feat: support integer field types
 feat: add relationship field support
 fix: handle deep nesting in json schemas
+feat: add draft and published statuses
