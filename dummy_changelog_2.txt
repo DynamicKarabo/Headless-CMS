@@ -1,1 +1,2 @@
 feat: add status field to documents table
+chore: generate drizzle migrations for status field
