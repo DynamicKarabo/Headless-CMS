@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { ClerkProvider } from '@clerk/nextjs';
 
 export const metadata: Metadata = {
   title: 'Edge CMS',
@@ -12,10 +13,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-black text-[#ededed] min-h-screen antialiased selection:bg-neutral-800">
-        {children}
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: 'white',
+          colorBackground: '#0a0a0a',
+          colorText: 'white',
+          colorInputBackground: 'black',
+          colorInputText: 'white',
+        }
+      }}
+    >
+      <html lang="en" className="dark">
+        <body className="bg-black text-[#ededed] min-h-screen antialiased selection:bg-neutral-800">
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
