@@ -2,3 +2,4 @@ init: bootstrap project
 chore: configure typescript and eslint
 feat: add base css theme and variables
 feat: implement responsive layout wrapper
+feat: add global sidebar navigation
