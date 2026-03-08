@@ -6,10 +6,24 @@ import { createDocument, getModels } from '@/app/actions';
 import { useRouter } from 'next/navigation';
 import RichTextEditor from '@/components/RichTextEditor';
 
+interface SchemaField {
+  name: string;
+  type: 'text' | 'rich-text';
+  required?: boolean;
+}
+
+interface ContentModel {
+  id: string;
+  name: string;
+  schemaJson: string;
+}
+
+const DANGEROUS_KEYS = ['__proto__', 'constructor', 'prototype'];
+
 export default function NewContentPage() {
   const router = useRouter();
-  const [models, setModels] = useState<any[]>([]);
-  const [selectedModel, setSelectedModel] = useState<any | null>(null);
+  const [models, setModels] = useState<ContentModel[]>([]);
+  const [selectedModel, setSelectedModel] = useState<ContentModel | null>(null);
   
   // State block for capturing rich text content which doesn't natively submit via FormData like standard inputs
   const [richTextData, setRichTextData] = useState<Record<string, string>>({});
@@ -21,13 +35,21 @@ export default function NewContentPage() {
   async function handleSubmit(formData: FormData) {
     if (!selectedModel) return;
     
-    const data: Record<string, any> = {};
-    const schema = JSON.parse(selectedModel.schemaJson);
-    schema.forEach((field: any) => {
+    const data: Record<string, string | null> = {};
+    const schema: SchemaField[] = JSON.parse(selectedModel.schemaJson);
+
+    schema.forEach((field) => {
+      // Security: Block dangerous keys to prevent prototype pollution
+      if (DANGEROUS_KEYS.includes(field.name)) {
+        console.warn(`Blocked potentially dangerous field name: ${field.name}`);
+        return;
+      }
+
       if (field.type === 'rich-text') {
         data[field.name] = richTextData[field.name] || '';
       } else {
-        data[field.name] = formData.get(field.name);
+        const value = formData.get(field.name);
+        data[field.name] = value ? String(value) : null;
       }
     });
 
@@ -85,7 +107,7 @@ export default function NewContentPage() {
                 </button>
               </div>
 
-              {JSON.parse(selectedModel.schemaJson).map((field: any) => (
+              {(JSON.parse(selectedModel.schemaJson) as SchemaField[]).map((field) => (
                 <div key={field.name} className="flex flex-col gap-2 mb-6">
                   <label className="text-sm font-medium text-neutral-300 flex items-center gap-1" htmlFor={field.name}>
                     {field.name.charAt(0).toUpperCase() + field.name.slice(1)}

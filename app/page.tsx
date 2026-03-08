@@ -1,6 +1,15 @@
 import Sidebar from '@/components/Sidebar';
+import { getDocuments, getModels } from '@/app/actions';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+
+export default async function Home() {
+  const models = await getModels();
+  const documents = await getDocuments();
+  
+  const totalModels = models.length;
+  const publishedContent = documents.filter(doc => doc.status === 'published').length;
+
   return (
     <div className="flex min-h-screen bg-black text-[#ededed]">
       <Sidebar />
@@ -15,11 +24,11 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-[#111111] border border-[#333333] rounded-xl p-6 shadow-sm">
             <h3 className="text-sm font-medium text-neutral-400 mb-4">Total Models</h3>
-            <div className="text-4xl font-semibold text-white tracking-tight">0</div>
+            <div className="text-4xl font-semibold text-white tracking-tight">{totalModels}</div>
           </div>
           <div className="bg-[#111111] border border-[#333333] rounded-xl p-6 shadow-sm">
             <h3 className="text-sm font-medium text-neutral-400 mb-4">Published Content</h3>
-            <div className="text-4xl font-semibold text-white tracking-tight">0</div>
+            <div className="text-4xl font-semibold text-white tracking-tight">{publishedContent}</div>
           </div>
           <div className="bg-[#111111] border border-[#333333] rounded-xl p-6 shadow-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 p-6">
