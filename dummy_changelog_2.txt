@@ -1,3 +1,4 @@
 feat: add status field to documents table
 chore: generate drizzle migrations for status field
 feat: support draft status in server actions
+feat: filter edge API content by published status
