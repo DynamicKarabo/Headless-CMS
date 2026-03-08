@@ -57,3 +57,4 @@ feat: bulk delete for models
 docs: improve installation guide
 chore: clean up unused dependencies
 feat: export content as json
+feat: import content from csv
