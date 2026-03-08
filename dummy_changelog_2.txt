@@ -34,3 +34,4 @@ chore: update environment variables for prod
 fix: edge runtime compatibility for fetch
 feat: implement optimistic ui updates
 perf: memoize expensive model maps
+style: add animations to sidebar transitions
