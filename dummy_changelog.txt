@@ -11,3 +11,4 @@ chore: add drizzle config
 chore: generate initial db migrations
 feat: implement db client utility
 feat: add server actions for model creation
+feat: add server actions for fetching models
