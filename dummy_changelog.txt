@@ -43,3 +43,4 @@ feat: secure edge API with auth headers
 fix: rate limit webhook endpoint
 feat: add analytics overview to dashboard
 feat: integrate prometheus metrics
+fix: prevent duplicate model names
