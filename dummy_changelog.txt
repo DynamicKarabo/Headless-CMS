@@ -21,3 +21,4 @@ feat: add server actions for document creation
 feat: link models to document entries
 fix: resolve hydration error on sidebar
 style: update primary accent color
+feat: add dynamic routing for edge content
