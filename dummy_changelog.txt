@@ -45,3 +45,4 @@ feat: add analytics overview to dashboard
 feat: integrate prometheus metrics
 fix: prevent duplicate model names
 refactor: improve error boundary handling
+feat: add skeleton loaders for async data
