@@ -32,3 +32,4 @@ chore: init turso database client
 feat: migrate schema to remote edge db
 chore: update environment variables for prod
 fix: edge runtime compatibility for fetch
+feat: implement optimistic ui updates
