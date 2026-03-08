@@ -28,3 +28,4 @@ feat: associate authors with documents
 feat: create author management dashboard
 style: update user avatars
 docs: auth provider configuration
+chore: init turso database client
