@@ -4,3 +4,4 @@ feat: support draft status in server actions
 feat: filter edge API content by published status
 feat: add draft/publish buttons to content form
 style: render document status badges dynamically
+refactor: extract status badge component
