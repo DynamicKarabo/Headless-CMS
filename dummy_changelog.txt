@@ -28,3 +28,4 @@ fix: handle nonexistent slugs gracefully
 refactor: organize db schema into separate files
 chore: setup pre-commit hooks
 docs: document api endpoints
+feat: add pagination to content entries
