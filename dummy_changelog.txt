@@ -26,3 +26,4 @@ feat: implement next.js cache control headers
 feat: create webhook for cache invalidation
 fix: handle nonexistent slugs gracefully
 refactor: organize db schema into separate files
+chore: setup pre-commit hooks
