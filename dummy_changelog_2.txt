@@ -30,3 +30,4 @@ style: update user avatars
 docs: auth provider configuration
 chore: init turso database client
 feat: migrate schema to remote edge db
+chore: update environment variables for prod
