@@ -17,3 +17,4 @@ feat: implement model creation UI
 feat: implement dynamic input fields
 feat: add content entries dashboard
 feat: create generic entry form
+feat: add server actions for document creation
