@@ -31,3 +31,4 @@ docs: document api endpoints
 feat: add pagination to content entries
 feat: implement search for models
 style: refine dashboard animations
+feat: add status badges to entries
