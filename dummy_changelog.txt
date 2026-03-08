@@ -33,3 +33,4 @@ feat: implement search for models
 style: refine dashboard animations
 feat: add status badges to entries
 feat: support rich text field definitions
+feat: add markdown editor component
