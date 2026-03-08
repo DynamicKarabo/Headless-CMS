@@ -8,3 +8,4 @@ feat: configure libsql database connection
 feat: define content model schema
 feat: define document schema
 chore: add drizzle config
+chore: generate initial db migrations
