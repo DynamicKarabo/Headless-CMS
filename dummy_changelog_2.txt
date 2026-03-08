@@ -13,3 +13,4 @@ docs: update readme with drafting instructions
 feat: add tiptap react dependencies
 feat: create rich text editor wrapper
 feat: integrate tiptap toolbar
+style: style tiptap editor to match dark theme
