@@ -6,3 +6,4 @@ feat: add draft/publish buttons to content form
 style: render document status badges dynamically
 refactor: extract status badge component
 fix: resolve type error on document insertion
+feat: add bulk publish action
