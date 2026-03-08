@@ -53,3 +53,4 @@ feat: add relationship field support
 fix: handle deep nesting in json schemas
 feat: add draft and published statuses
 feat: implement soft delete for documents
+feat: bulk delete for models
