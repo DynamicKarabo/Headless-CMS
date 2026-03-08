@@ -10,3 +10,4 @@ feat: define document schema
 chore: add drizzle config
 chore: generate initial db migrations
 feat: implement db client utility
+feat: add server actions for model creation
