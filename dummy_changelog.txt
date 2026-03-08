@@ -38,3 +38,4 @@ fix: correct date formatting in tables
 feat: implement user settings page
 feat: add dark mode toggle
 chore: update next.js to latest patch
+feat: add api key generation UI
