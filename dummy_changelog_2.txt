@@ -38,3 +38,4 @@ style: add animations to sidebar transitions
 feat: implement drag and drop for list fields
 fix: prevent form submission on enter key
 refactor: split server actions into modules
+feat: add revision history schema
