@@ -3,6 +3,8 @@ import { db } from '@/db';
 import { documents } from '@/db/schema';
 import { eq, and } from 'drizzle-orm';
 
+// export const runtime = 'edge';
+
 // We map Next.js tags for standard on-demand revalidation.
 export async function GET(
   request: Request,

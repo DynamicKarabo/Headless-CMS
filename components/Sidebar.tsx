@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { UserButton, SignInButton, useUser } from '@clerk/nextjs';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -12,6 +13,8 @@ export default function Sidebar() {
     { label: 'Content Entries', href: '/content' },
     { label: 'Settings', href: '/settings' },
   ];
+
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <aside className="w-64 flex-shrink-0 min-h-screen border-r border-[#333333] bg-[#000000] p-6 flex flex-col gap-8">
@@ -42,6 +45,24 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      <div className="mt-auto pt-6 border-t border-[#333333]">
+        {isLoaded && isSignedIn && (
+          <div className="flex items-center gap-3 w-full px-3 py-2 text-sm font-medium rounded-md hover:bg-[#111111] transition-colors">
+             <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-8 h-8 rounded-md' } }} />
+             <span className="text-neutral-400">Account</span>
+          </div>
+        )}
+        {isLoaded && !isSignedIn && (
+          <div className="flex items-center justify-center w-full">
+            <SignInButton mode="modal">
+               <button className="w-full px-4 py-2 text-sm font-medium text-black bg-white rounded-md hover:bg-neutral-200 transition-colors">
+                 Sign In
+               </button>
+            </SignInButton>
+          </div>
+        )}
+      </div>
     </aside>
   );
 }
