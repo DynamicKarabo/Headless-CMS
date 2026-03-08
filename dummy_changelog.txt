@@ -40,3 +40,4 @@ feat: add dark mode toggle
 chore: update next.js to latest patch
 feat: add api key generation UI
 feat: secure edge API with auth headers
+fix: rate limit webhook endpoint
