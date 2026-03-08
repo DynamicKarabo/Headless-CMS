@@ -25,3 +25,4 @@ feat: secure dashboard routes with middleware
 feat: add user profile button to sidebar
 fix: public route matcher in middleware
 feat: associate authors with documents
+feat: create author management dashboard
