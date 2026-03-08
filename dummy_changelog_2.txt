@@ -18,3 +18,4 @@ feat: parse rich text content in Edge API
 fix: sanitize html output from editor
 feat: handle image uploads in rich text
 test: verify rich text serialization
+feat: add clerk authentication package
