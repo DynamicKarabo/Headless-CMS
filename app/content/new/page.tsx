@@ -10,7 +10,6 @@ export default function NewContentPage() {
   const [models, setModels] = useState<any[]>([]);
   const [selectedModel, setSelectedModel] = useState<any | null>(null);
   
-  // Load models on mount
   useEffect(() => {
     getModels().then(setModels);
   }, []);
@@ -18,7 +17,6 @@ export default function NewContentPage() {
   async function handleSubmit(formData: FormData) {
     if (!selectedModel) return;
     
-    // Convert form data to object based on schema
     const data: Record<string, any> = {};
     const schema = JSON.parse(selectedModel.schemaJson);
     schema.forEach((field: any) => {
@@ -30,55 +28,66 @@ export default function NewContentPage() {
   }
 
   return (
-    <div className="dashboard-layout">
+    <div className="flex min-h-screen bg-black text-[#ededed]">
       <Sidebar />
-      <main className="main-content">
-        <div className="page-header">
-          <div>
-            <h1 className="title">Create Content Entry</h1>
-            <p className="subtitle">Publish new content to your Edge API</p>
-          </div>
+      <main className="flex-1 p-10 overflow-auto relative rounded-tl-2xl border-t border-l border-[#333333] bg-[#0a0a0a] shadow-2xl mt-4 max-h-[calc(100vh-1rem)] mr-4">
+        <div className="mb-10">
+          <h1 className="text-3xl font-semibold tracking-tight text-white mb-2">Create Content Entry</h1>
+          <p className="text-neutral-400 text-sm">Publish new content to your Edge API</p>
         </div>
 
-        <div className="card" style={{ maxWidth: '600px', marginBottom: '2rem' }}>
+        <div className="bg-[#111111] border border-[#333333] rounded-xl p-8 max-w-2xl shadow-sm mb-8">
           {!selectedModel ? (
             <div>
-              <h3 style={{ marginBottom: '1rem' }}>Select a Content Model First</h3>
+              <h3 className="text-lg font-medium text-white mb-4">Select a Content Model First</h3>
               {models.length === 0 ? (
-                <p style={{ color: 'var(--danger)' }}>You need to create a content model before you can add entries.</p>
+                <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-md text-red-500 text-sm">
+                  You need to create a content model before you can add entries.
+                </div>
               ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <div className="flex flex-col gap-3">
                   {models.map(m => (
                     <button 
                       key={m.id} 
-                      className="btn btn-secondary" 
-                      style={{ justifyContent: 'flex-start' }}
+                      className="flex items-center justify-between w-full px-4 py-3 text-left bg-[#1a1a1a] border border-[#333333] rounded-md hover:bg-[#222222] hover:border-neutral-600 transition-all group"
                       onClick={() => setSelectedModel(m)}
                     >
-                      {m.name}
+                      <span className="font-medium text-[#ededed]">{m.name}</span>
+                      <span className="text-neutral-500 group-hover:text-white transition-colors">→</span>
                     </button>
                   ))}
                 </div>
               )}
             </div>
           ) : (
-            <form action={handleSubmit}>
-              <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="badge">Model: {selectedModel.name}</span>
-                <button type="button" onClick={() => setSelectedModel(null)} style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Change Model</button>
+            <form action={handleSubmit} className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#333333]">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-neutral-400">Targeting Model:</span>
+                  <span className="inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold bg-[#222222] text-[#ededed] border border-[#333333]">
+                    {selectedModel.name}
+                  </span>
+                </div>
+                <button 
+                  type="button" 
+                  onClick={() => setSelectedModel(null)} 
+                  className="text-xs font-medium text-neutral-500 hover:text-white transition-colors underline decoration-neutral-500/30 hover:decoration-white/50 underline-offset-4"
+                >
+                  Change Model
+                </button>
               </div>
 
               {JSON.parse(selectedModel.schemaJson).map((field: any) => (
-                <div key={field.name} className="input-group">
-                  <label className="label" htmlFor={field.name}>
+                <div key={field.name} className="flex flex-col gap-2 mb-6">
+                  <label className="text-sm font-medium text-neutral-300 flex items-center gap-1" htmlFor={field.name}>
                     {field.name.charAt(0).toUpperCase() + field.name.slice(1)}
-                    {field.required && ' *'}
+                    {field.required && <span className="text-red-500">*</span>}
                   </label>
                   {field.type === 'rich-text' ? (
                     <textarea 
                       id={field.name} 
                       name={field.name} 
-                      className="input" 
+                      className="bg-black border border-[#333333] text-white rounded-md px-4 py-3 outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all font-sans resize-y min-h-[150px]" 
                       required={field.required}
                       rows={6}
                     ></textarea>
@@ -87,16 +96,27 @@ export default function NewContentPage() {
                       type="text" 
                       id={field.name} 
                       name={field.name} 
-                      className="input" 
+                      className="bg-black border border-[#333333] text-white rounded-md px-4 py-2.5 outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all font-sans" 
                       required={field.required}
                     />
                   )}
                 </div>
               ))}
 
-              <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
-                <button type="submit" className="btn btn-primary">Publish Entry</button>
-                <button type="button" className="btn btn-secondary" onClick={() => router.push('/content')}>Cancel</button>
+              <div className="flex items-center gap-4 pt-6 border-t border-[#333333] mt-8">
+                <button 
+                  type="submit" 
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-black bg-white rounded-md hover:bg-neutral-200 transition-colors"
+                >
+                  Publish Entry
+                </button>
+                <button 
+                  type="button" 
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-[#ededed] bg-transparent border border-[#333333] hover:bg-[#1a1a1a] rounded-md transition-colors" 
+                  onClick={() => router.push('/content')}
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           )}

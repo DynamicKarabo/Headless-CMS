@@ -10,54 +10,64 @@ export default async function ContentPage() {
   const modelsMap = models.reduce((acc, curr) => ({ ...acc, [curr.id]: curr.name }), {} as Record<string, string>);
 
   return (
-    <div className="dashboard-layout">
+    <div className="flex min-h-screen bg-black text-[#ededed]">
       <Sidebar />
-      <main className="main-content">
-        <div className="page-header">
+      <main className="flex-1 p-10 overflow-auto relative rounded-tl-2xl border-t border-l border-[#333333] bg-[#0a0a0a] shadow-2xl mt-4 max-h-[calc(100vh-1rem)] mr-4">
+        <div className="flex justify-between items-end mb-10">
           <div>
-            <h1 className="title">Content Entries</h1>
-            <p className="subtitle">Manage all your published content.</p>
+            <h1 className="text-3xl font-semibold tracking-tight text-white mb-2">Content Entries</h1>
+            <p className="text-neutral-400 text-sm">Manage all your published content.</p>
           </div>
-          <Link href="/content/new" className="btn btn-primary">
-            + Create Entry
+          <Link 
+            href="/content/new" 
+            className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-black bg-white rounded-md hover:bg-neutral-200 transition-colors"
+          >
+            Create Entry
           </Link>
         </div>
 
         {documents.length === 0 ? (
-          <div className="card" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📝</div>
-            <h3>No entries yet</h3>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>Create your first content entry</p>
-            <Link href="/content/new" className="btn btn-secondary">
+          <div className="flex flex-col items-center justify-center py-20 px-4 border border-dashed border-[#333333] rounded-xl bg-[#111111]/50">
+            <div className="text-4xl mb-4">📝</div>
+            <h3 className="text-lg font-medium text-white mb-1">No entries yet</h3>
+            <p className="text-neutral-400 text-sm mb-6">Create your first content entry</p>
+            <Link 
+              href="/content/new" 
+              className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-[#ededed] bg-[#171717] border border-[#333333] rounded-md hover:bg-[#222222] transition-colors"
+            >
               Create Entry
             </Link>
           </div>
         ) : (
-          <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-            <table className="data-table">
+          <div className="bg-[#111111] border border-[#333333] rounded-xl overflow-hidden shadow-sm">
+            <table className="w-full text-left border-collapse">
               <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Model</th>
-                  <th>Slug</th>
-                  <th>Status</th>
-                  <th>Last Updated</th>
+                <tr className="border-b border-[#333333] bg-[#1a1a1a]">
+                  <th className="px-6 py-3 text-xs font-medium text-neutral-400 uppercase tracking-wider">Title</th>
+                  <th className="px-6 py-3 text-xs font-medium text-neutral-400 uppercase tracking-wider">Model</th>
+                  <th className="px-6 py-3 text-xs font-medium text-neutral-400 uppercase tracking-wider">Slug</th>
+                  <th className="px-6 py-3 text-xs font-medium text-neutral-400 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-xs font-medium text-neutral-400 uppercase tracking-wider">Last Updated</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-[#333333]">
                 {documents.map((doc) => {
                   const data = JSON.parse(doc.contentJson);
                   return (
-                    <tr key={doc.id}>
-                      <td style={{ fontWeight: 600 }}>{data.title || 'Untitled'}</td>
-                      <td>
-                        <span className="badge">{modelsMap[doc.modelId] || doc.modelId}</span>
+                    <tr key={doc.id} className="hover:bg-[#1a1a1a] transition-colors group">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{data.title || 'Untitled'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#222222] text-neutral-300 border border-[#333333]">
+                          {modelsMap[doc.modelId] || doc.modelId}
+                        </span>
                       </td>
-                      <td style={{ fontFamily: 'monospace', color: 'var(--text-secondary)' }}>{doc.slug}</td>
-                      <td>
-                        <span className="badge active">Published</span>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-neutral-500">{doc.slug}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">
+                          Published
+                        </span>
                       </td>
-                      <td>{new Date(doc.updatedAt).toLocaleDateString()}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-400">{new Date(doc.updatedAt).toLocaleDateString()}</td>
                     </tr>
                   );
                 })}
