@@ -22,3 +22,4 @@ feat: link models to document entries
 fix: resolve hydration error on sidebar
 style: update primary accent color
 feat: add dynamic routing for edge content
+feat: implement next.js cache control headers
