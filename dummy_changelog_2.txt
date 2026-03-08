@@ -12,3 +12,4 @@ test: API respects publishing states
 docs: update readme with drafting instructions
 feat: add tiptap react dependencies
 feat: create rich text editor wrapper
+feat: integrate tiptap toolbar
